@@ -1,3 +1,14 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Speciality, Worker
+
+class SpecialityAdmin(admin.ModelAdmin):
+    pass
+
+
+class WorkerAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Speciality, SpecialityAdmin)
+admin.site.register(Worker, WorkerAdmin)
+
