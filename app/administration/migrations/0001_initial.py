@@ -9,33 +9,28 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('accounts', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Speciality',
+            name='Location',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('last_modified', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('skill', models.CharField(max_length=255)),
+                ('place', models.CharField(max_length=255)),
             ],
             options={
-                'ordering': ('skill',),
+                'ordering': ('place',),
             },
         ),
         migrations.CreateModel(
-            name='Worker',
+            name='WorkerLocationJobInterval',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_modified', models.DateTimeField(auto_now=True)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('specialty', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='workers.speciality')),
-                ('worker', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.customuser')),
+                ('start_time', models.DateTimeField()),
+                ('end_time', models.DateTimeField()),
+                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='administration.location')),
             ],
-            options={
-                'ordering': ('worker',),
-            },
         ),
     ]
