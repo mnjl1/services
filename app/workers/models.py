@@ -25,7 +25,7 @@ class Worker(TimeStampModel):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
-    specialty = models.ForeignKey(Speciality, on_delete=models.CASCADE)
+    skill = models.ForeignKey(Speciality, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('worker', )

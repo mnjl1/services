@@ -15,14 +15,14 @@ def test_location_model():
 
 
 @pytest.mark.django_db
-def test_woker_location_inteval():
+def test_woker_location_interval():
     location = Location(place='AcademCityCenter')
     location.save()
     massage = Speciality(skill='massage')
     massage.save()
     user = CustomUser(username='Elon', email='elon@twitter.com')
     user.save()
-    worker = Worker(worker=user, specialty=massage)
+    worker = Worker(worker=user, skill=massage)
     worker.save()
     service = WorkerLocationJobInterval(
         location=location,
@@ -33,4 +33,4 @@ def test_woker_location_inteval():
     service.save()
 
     assert service.location.place == 'AcademCityCenter'
-    assert service.worker.specialty.skill == 'massage'
+    assert service.worker.skill.skill == 'massage'

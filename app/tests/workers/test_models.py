@@ -5,10 +5,10 @@ from accounts.models import CustomUser
 
 @pytest.mark.django_db
 def test_speciality_model():
-    speciality = Speciality(skill='massage')
-    speciality.save()
+    skill = Speciality(skill='massage')
+    skill.save()
 
-    assert speciality.skill == 'massage'
+    assert skill.skill == 'massage'
 
 
 @pytest.mark.django_db
@@ -17,6 +17,6 @@ def test_worker_model():
     massage.save()
     user = CustomUser(username='Elon', email='elon@twitter.com')
     user.save()
-    worker = Worker(worker=user, specialty=massage)
+    worker = Worker(worker=user, skill=massage)
     worker.save()
-    assert worker.specialty.skill== 'massage'
+    assert worker.skill.skill== 'massage'
