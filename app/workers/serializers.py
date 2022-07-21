@@ -17,5 +17,5 @@ class WorkerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Worker
-        fields = '__all__'
+        fields = ('worker', 'skill',)
         read_only_fields = ('id', 'created', 'last_modified',)

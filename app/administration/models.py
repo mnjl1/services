@@ -7,23 +7,37 @@ from datetime import datetime
 
 from .utils import overlap
 
+
+class WorkerLocationJobIntervalManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            start_time__gte = datetime.now()
+            ).filter(
+                is_reserved=False
+            )
+
+
 class Location(TimeStampModel):
     """
     Worker locations
     """
-    place = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ('place', )
+        ordering = ('location', )
 
     def __str__(self):
-        return f'{self.place}'
+        return f'{self.location}'
 
 class WorkerLocationJobInterval(TimeStampModel):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    is_reserved = models.BooleanField(default=False)
+
+    objects = models.Manager()
+    free_for_appontment_objects = WorkerLocationJobIntervalManager()
 
     def __str__(self):
         return f'{self.location}, {self.worker}, {self.start_time}, {self.end_time}'
@@ -46,8 +60,7 @@ def check_worker_is_available(sender, instance, *args, **kwargs):
 
         if interval.location == instance.location:
             if interval.worker == instance.worker:
-                if not overlap(start, end, i1) or not overlap(start, end, i2):
-                    print('OK!')
+                if not overlap(start, end, i1) and not overlap(start, end, i2):
                     pass
                 else:
                     raise Exception('Object saving restriction')

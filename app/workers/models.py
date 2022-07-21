@@ -31,4 +31,4 @@ class Worker(TimeStampModel):
         ordering = ('worker', )
 
     def __str__(self):
-        return f'{self.worker}, {self.specialty}'
+        return f'{self.worker}, {self.skill}'

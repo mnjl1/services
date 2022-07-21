@@ -1,4 +1,3 @@
-from calendar import TUESDAY, weekday
 from django.db import models
 from workers.models import TimeStampModel, Worker
 from administration.models import WorkerLocationJobInterval
